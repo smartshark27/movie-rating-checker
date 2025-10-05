@@ -5,7 +5,10 @@ import requests
 # This script fetches a list of movies from the SBS On Demand catalogue.
 # It uses the public API endpoint to retrieve movie data.
 
-url = "https://catalogue.pr.sbsod.com/collections/all-movies"
+collection_urls = {
+    "all-movies": "https://catalogue.pr.sbsod.com/collections/all-movies",
+    "recently-added-movies": "https://catalogue.pr.sbsod.com/collections/recently-added-movies",
+}
 headers = {
     "Accept": "*/*",
     "Accept-Encoding": "gzip, deflate, br",
@@ -23,10 +26,16 @@ max_pages = 20
 output_file = "sbs_movies.json"
 
 
-def get_all_movies():
+def get_movies(collection="recently-added-movies"):
     """
     Fetch all movies from the SBS On Demand catalogue.
     """
+    if collection not in collection_urls:
+        raise ValueError(
+            f"Invalid collection '{collection}'. Must be one of {list(collection_urls.keys())}."
+        )
+    url = collection_urls[collection]
+
     # Build the cursor query param
     cursor_dict = {
         "audio": "",
@@ -54,26 +63,10 @@ def get_all_movies():
 
         movies.extend(
             [
-                {"title": item["title"], "releaseYear": item["releaseYear"]}
+                {"title": item["title"], "year": str(item["releaseYear"])}
                 for item in data["items"]
             ]
         )
 
     print(f"Total movies found: {len(movies)}")
     return movies
-
-
-def save_to_json_file(data, filename):
-    """
-    Save a list of dictionaries to a JSON file.
-
-    :param data: List of dictionaries to save
-    :param filename: Name of the JSON file
-    """
-    with open(filename, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-
-
-
-movies = get_all_movies()
-save_to_json_file(movies, output_file)
