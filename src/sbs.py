@@ -63,10 +63,22 @@ def get_movies(collection="recently-added-movies"):
 
         movies.extend(
             [
-                {"title": item["title"], "year": str(item["releaseYear"])}
+                {
+                    "title": item["title"],
+                    "year": str(item["releaseYear"]),
+                    "sbsURL": "https://www.sbs.com.au/ondemand/movie/"
+                    + item["slug"]
+                    + "/"
+                    + str(item["mpxMediaID"]),
+                }
                 for item in data["items"]
             ]
         )
 
     print(f"Total movies found: {len(movies)}")
     return movies
+
+
+if __name__ == "__main__":
+    movies = get_movies("recently-added-movies")
+    print("movies:", movies)

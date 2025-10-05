@@ -13,15 +13,21 @@ def main():
         help="The media source to check. Must be one of 'sbs-recently-added-movies' or 'sbs-all-movies'.",
     )
     parser.add_argument(
+        "--tmdb-api-key",
+        type=str,
+        help="The TMDB API key. If not provided, it will be fetched from the TMDB_API_KEY environment variable.",
+    )
+    parser.add_argument(
         "--sort-by",
         choices=["tmdb-rating", "tmdb-rating-count", "tmdb-popularity"],
         default="tmdb-rating",
         help="Sort the movies by 'tmdb-rating' or 'tmdb-popularity'. Default is 'tmdb-rating'.",
     )
     parser.add_argument(
-        "--tmdb-api-key",
-        type=str,
-        help="The TMDB API key. If not provided, it will be fetched from the TMDB_API_KEY environment variable.",
+        "--min-rating-count",
+        type=int,
+        default=100,
+        help="Minimum number of ratings to include a movie in the output. Default is 100",
     )
     args = parser.parse_args()
 
@@ -46,6 +52,13 @@ def main():
 
     tmdb_media_list = get_tmdb_media_list(tmdb_api_key, media_list)
 
+    # Filter by minimum rating count
+    tmdb_media_list = [
+        m
+        for m in tmdb_media_list
+        if m.get("tmdbRatingCount", 0) >= args.min_rating_count
+    ]
+
     # Sort the movies
     if args.sort_by == "tmdb-rating":
         tmdb_media_list.sort(key=lambda x: x.get("tmdbRating", 0), reverse=True)
@@ -54,11 +67,13 @@ def main():
     elif args.sort_by == "tmdb-popularity":
         tmdb_media_list.sort(key=lambda x: x.get("tmdbPopularity", 0), reverse=True)
 
+    # Save to output file
     create_dir_if_not_exists("output")
     output_file = "output/" + args.media_source.replace("-", "_") + "_with_tmdb.json"
     save_to_json_file(tmdb_media_list, output_file)
-
     print(f"Saved {len(tmdb_media_list)} movies to {output_file}")
+
+    print("Done.")
 
 
 if __name__ == "__main__":
