@@ -15,22 +15,22 @@ def get_tmdb_media_list(api_key, media_list):
     for media in media_list:
         title = media.get("title")
         year = media.get("year")
-        if not title or not year:
+        if not title:
             continue
+
+        tmdb_media = {}
 
         # Lookup in cache first because TMDB is slow
         cached = lookup_cache(cache, title, year)
         if cached:
             print(f"Using cached TMDB data for '{title}' ({year})")
-            tmdb_media_list.append(cached)
-            continue
+            tmdb_media = cached
+        else:
+            tmdb_media = get_media_from_tmdb(api_key, title, year)
+            if tmdb_media:
+                cache.append(tmdb_media)
 
-        tmdb_media = get_media_from_tmdb(api_key, title, year)
-        result = {**media, **(tmdb_media or {})}
-        tmdb_media_list.append(result)
-
-        # Update cache
-        cache.append(result)
+        tmdb_media_list.append({**media, **(tmdb_media or {})})
 
     # Save updated cache
     create_dir_if_not_exists("cache")
@@ -52,17 +52,21 @@ def load_cache(filename):
         return []
 
 
-def lookup_cache(cache, title, year):
+def lookup_cache(cache, title, year=None):
     """
     Lookup a movie in the cache by title and year.
     """
     return next(
-        (m for m in cache if m["title"] == title and m["year"] == year),
+        (
+            m
+            for m in cache
+            if m["title"] == title and (m["year"] == year or year is None)
+        ),
         None,
     )
 
 
-def get_media_from_tmdb(api_key, title, year):
+def get_media_from_tmdb(api_key, title, year=None):
     """
     Get TMDB movie details by title and optional year.
     """
@@ -84,19 +88,23 @@ def get_media_from_tmdb(api_key, title, year):
     }
 
 
-def query_tmdb(api_key, title, year):
+def query_tmdb(api_key, title, year=None):
     """
     Query TMDB for movies by title and optional year.
     """
     print(f"Searching TMDB for '{title}' ({year})...")
+
+    params = {
+        "api_key": api_key,
+        "query": title,
+    }
+    if year:
+        params["year"] = year
+
     return (
         requests.get(
             tmdb_movie_search_url,
-            params={
-                "api_key": api_key,
-                "query": title,
-                "year": year,
-            },
+            params=params,
         )
         .json()
         .get("results", [])

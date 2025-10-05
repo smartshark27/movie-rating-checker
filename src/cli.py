@@ -9,7 +9,7 @@ def main():
     parser = argparse.ArgumentParser(description="Movie Rating Checker CLI")
     parser.add_argument(
         "media_source",
-        choices=["sbs-recently-added-movies", "sbs-all-movies"],
+        choices=["abc-all-movies", "abc-movies-of-the-week", "sbs-recently-added-movies", "sbs-all-movies"],
         help="The media source to check. Must be one of 'sbs-recently-added-movies' or 'sbs-all-movies'.",
     )
     parser.add_argument(
@@ -41,7 +41,15 @@ def main():
 
     media_list = []
 
-    if args.media_source == "sbs-recently-added-movies":
+    if args.media_source == "abc-all-movies":
+        from abciview import get_movies
+
+        media_list = get_movies("all-movies")
+    if args.media_source == "abc-movies-of-the-week":
+        from abciview import get_movies
+
+        media_list = get_movies("movies-of-the-week")
+    elif args.media_source == "sbs-recently-added-movies":
         from sbs import get_movies
 
         media_list = get_movies("recently-added-movies")

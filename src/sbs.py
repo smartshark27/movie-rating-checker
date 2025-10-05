@@ -23,7 +23,6 @@ headers = {
 }
 items_per_page = "100"
 max_pages = 20
-output_file = "sbs_movies.json"
 
 
 def get_movies(collection="recently-added-movies"):
