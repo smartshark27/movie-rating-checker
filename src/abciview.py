@@ -1,6 +1,6 @@
 import requests
 
-# This script fetches a list of movies from the SBS On Demand catalogue.
+# This script fetches a list of movies from the ABC iView catalogue.
 # It uses the public API endpoint to retrieve movie data.
 
 collection_urls = {

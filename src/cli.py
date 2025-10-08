@@ -9,7 +9,12 @@ def main():
     parser = argparse.ArgumentParser(description="Movie Rating Checker CLI")
     parser.add_argument(
         "media_source",
-        choices=["abc-all-movies", "abc-movies-of-the-week", "sbs-recently-added-movies", "sbs-all-movies"],
+        choices=[
+            "abc-all-movies",
+            "abc-movies-of-the-week",
+            "sbs-recently-added-movies",
+            "sbs-all-movies",
+        ],
         help="The media source to check. Must be one of 'sbs-recently-added-movies' or 'sbs-all-movies'.",
     )
     parser.add_argument(
@@ -24,10 +29,16 @@ def main():
         help="Sort the movies by 'tmdb-rating' or 'tmdb-popularity'. Default is 'tmdb-rating'.",
     )
     parser.add_argument(
+        "--min-rating",
+        type=int,
+        default=7,
+        help="Minimum rating to include a movie in the output. Default is 7.",
+    )
+    parser.add_argument(
         "--min-rating-count",
         type=int,
         default=100,
-        help="Minimum number of ratings to include a movie in the output. Default is 100",
+        help="Minimum number of ratings to include a movie in the output. Default is 100.",
     )
     args = parser.parse_args()
 
@@ -65,6 +76,7 @@ def main():
         m
         for m in tmdb_media_list
         if m.get("tmdbRatingCount", 0) >= args.min_rating_count
+        and m.get("tmdbRating", 0) >= args.min_rating
     ]
 
     # Sort the movies

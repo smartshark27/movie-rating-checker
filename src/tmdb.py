@@ -60,7 +60,7 @@ def lookup_cache(cache, title, year=None):
         (
             m
             for m in cache
-            if m["title"] == title and (m["year"] == year or year is None)
+            if m["searchTitle"] == title and (m["year"] == year or year is None)
         ),
         None,
     )
@@ -73,12 +73,21 @@ def get_media_from_tmdb(api_key, title, year=None):
     search_results = query_tmdb(api_key, title, year)
     if not search_results:
         print(f"No TMDB results found for '{title}' ({year})")
-        return None
+        return {
+            "searchTitle": title,
+            "title": title,
+            "year": year,
+            "tmdbPopularity": 0,
+            "tmdbRating": 0,
+            "tmdbRatingCount": 0,
+            "imdbID": None,
+        }
 
     # Use the first search result
     tmdb_id = search_results[0]["id"]
     movie = lookup_tmdb(api_key, tmdb_id)
     return {
+        "searchTitle": title,
         "title": movie["title"],
         "year": movie["release_date"][:4] if movie.get("release_date") else None,
         "tmdbPopularity": movie["popularity"],
