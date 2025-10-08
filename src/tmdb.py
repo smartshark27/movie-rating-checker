@@ -3,30 +3,27 @@ import requests
 from utils import create_dir_if_not_exists, read_json_file, save_to_json_file
 
 tmdb_movie_search_url = "https://api.themoviedb.org/3/search/movie"
+tmdb_show_search_url = "https://api.themoviedb.org/3/search/tv"
 
 
 def get_tmdb_media_list(api_key, media_list):
     """
     Get TMDB details for a list of media items.
-    Each item in media_list should be a dict with 'title' and 'year'.
+    Each item in media_list should be a dict with 'mediaType', 'title' and 'year'.
     """
     cache = load_cache("cache/tmdb.json")
     tmdb_media_list = []
     for media in media_list:
-        title = media.get("title")
-        year = media.get("year")
-        if not title:
-            continue
-
         tmdb_media = {}
 
         # Lookup in cache first because TMDB is slow
-        cached = lookup_cache(cache, title, year)
+        cache_key = f"{media['mediaType']}-{media['title']}-{media.get('year', 'noyear')}"
+        cached = lookup_cache(cache, cache_key)
         if cached:
-            print(f"Using cached TMDB data for '{title}' ({year})")
+            print(f"Using cached TMDB data for key '{cache_key}'")
             tmdb_media = cached
         else:
-            tmdb_media = get_media_from_tmdb(api_key, title, year)
+            tmdb_media = get_media_from_tmdb(api_key, media, cache_key)
             if tmdb_media:
                 cache.append(tmdb_media)
 
@@ -52,29 +49,27 @@ def load_cache(filename):
         return []
 
 
-def lookup_cache(cache, title, year=None):
+def lookup_cache(cache, cache_key):
     """
-    Lookup a movie in the cache by title and year.
+    Lookup a movie in the cache using the cache key.
     """
     return next(
-        (
-            m
-            for m in cache
-            if m["searchTitle"] == title and (m["year"] == year or year is None)
-        ),
+        (m for m in cache if m["cacheKey"] == cache_key),
         None,
     )
 
 
-def get_media_from_tmdb(api_key, title, year=None):
+def get_media_from_tmdb(api_key, media, cache_key):
     """
     Get TMDB movie details by title and optional year.
     """
+    title = media["title"]
+    year = media.get("year")
     search_results = query_tmdb(api_key, title, year)
     if not search_results:
         print(f"No TMDB results found for '{title}' ({year})")
         return {
-            "searchTitle": title,
+            "cacheKey": cache_key,
             "title": title,
             "year": year,
             "tmdbPopularity": 0,
@@ -87,7 +82,7 @@ def get_media_from_tmdb(api_key, title, year=None):
     tmdb_id = search_results[0]["id"]
     movie = lookup_tmdb(api_key, tmdb_id)
     return {
-        "searchTitle": title,
+        "cacheKey": cache_key,
         "title": movie["title"],
         "year": movie["release_date"][:4] if movie.get("release_date") else None,
         "tmdbPopularity": movie["popularity"],

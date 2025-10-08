@@ -12,9 +12,9 @@ headers = {
 }
 
 
-def get_movies(collection="movies-of-the-week"):
+def get_abc_media_list(collection="movies-of-the-week"):
     """
-    Fetch all movies from the SBS On Demand catalogue.
+    Fetch all media from a collection from the ABC iView catalogue.
     """
     if collection not in collection_urls:
         raise ValueError(
@@ -26,21 +26,32 @@ def get_movies(collection="movies-of-the-week"):
     if response.status_code != 200:
         raise Exception(f"Failed to fetch data: {response.status_code}")
 
-    movies = [
+    media_list = [
         {
-            "title": movie["title"],
-            "abcURL": movie["shareUrl"],
+            "mediaType": get_media_type(media),
+            "title": media["title"],
+            "abcURL": media["shareUrl"],
         }
-        for movie in response.json()["items"]
+        for media in response.json()["items"]
     ]
 
-    print(f"Total movies found: {len(movies)}")
-    return movies
+    print(f"Total media found: {len(media_list)}")
+    return media_list
+
+
+def get_media_type(media):
+    abc_media_type = media["status"]["title"]
+    if abc_media_type == "MOVIE":
+        return "movie"
+    else:
+        print(f"Unknown media type '{abc_media_type}' for item '{media['title']}'")
+
+    return None
 
 
 if __name__ == "__main__":
-    movies = get_movies()
-    print("movies:", movies)
+    media_list = get_abc_media_list()
+    print("media:", media_list)
 
 
 # Sample movie data structure from the API:

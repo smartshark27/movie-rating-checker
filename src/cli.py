@@ -1,6 +1,8 @@
 import argparse
 import os
 import sys
+from abciview import get_abc_media_list
+from sbs import get_sbs_media_list
 from tmdb import get_tmdb_media_list
 from utils import create_dir_if_not_exists, save_to_json_file
 
@@ -15,7 +17,7 @@ def main():
             "sbs-recently-added-movies",
             "sbs-all-movies",
         ],
-        help="The media source to check. Must be one of 'sbs-recently-added-movies' or 'sbs-all-movies'.",
+        help="The media source to check.",
     )
     parser.add_argument(
         "--tmdb-api-key",
@@ -51,23 +53,14 @@ def main():
         sys.exit(1)
 
     media_list = []
-
     if args.media_source == "abc-all-movies":
-        from abciview import get_movies
-
-        media_list = get_movies("all-movies")
+        media_list = get_abc_media_list("all-movies")
     if args.media_source == "abc-movies-of-the-week":
-        from abciview import get_movies
-
-        media_list = get_movies("movies-of-the-week")
+        media_list = get_abc_media_list("movies-of-the-week")
     elif args.media_source == "sbs-recently-added-movies":
-        from sbs import get_movies
-
-        media_list = get_movies("recently-added-movies")
+        media_list = get_sbs_media_list("recently-added-movies")
     elif args.media_source == "sbs-all-movies":
-        from sbs import get_movies
-
-        media_list = get_movies("all-movies")
+        media_list = get_sbs_media_list("all-movies")
 
     tmdb_media_list = get_tmdb_media_list(tmdb_api_key, media_list)
 
