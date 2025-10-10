@@ -4,8 +4,10 @@ import requests
 # It uses the public API endpoint to retrieve movie data.
 
 collection_urls = {
-    "all-movies": "https://api.iview.abc.net.au/v3/collection/2711",
+    "movies-all": "https://api.iview.abc.net.au/v3/collection/2711",
     "movies-of-the-week": "https://api.iview.abc.net.au/v3/collection/4028",
+    "shows-comedy-gold": "https://api.iview.abc.net.au/v3/collection/2011",
+    "shows-time-for-a-rewatch": "https://api.iview.abc.net.au/v3/collection/4048",
 }
 headers = {
     "User-Agent": "Mozilla/5.0",
@@ -40,13 +42,7 @@ def get_abc_media_list(collection="movies-of-the-week"):
 
 
 def get_media_type(media):
-    abc_media_type = media["status"]["title"]
-    if abc_media_type == "MOVIE":
-        return "movie"
-    else:
-        print(f"Unknown media type '{abc_media_type}' for item '{media['title']}'")
-
-    return None
+    return "show" if media.get("episodeCount", 0) > 0 else "movie"
 
 
 if __name__ == "__main__":

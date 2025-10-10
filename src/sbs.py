@@ -6,8 +6,9 @@ import requests
 # It uses the public API endpoint to retrieve collection data.
 
 collection_urls = {
-    "all-movies": "https://catalogue.pr.sbsod.com/collections/all-movies",
-    "recently-added-movies": "https://catalogue.pr.sbsod.com/collections/recently-added-movies",
+    "movies-all": "https://catalogue.pr.sbsod.com/collections/all-movies",
+    "movies-recently-added": "https://catalogue.pr.sbsod.com/collections/recently-added-movies",
+    "shows-bingeable-box-sets": "https://catalogue.pr.sbsod.com/collections/bingeable-box-sets",
 }
 headers = {
     "Accept": "*/*",
@@ -54,8 +55,11 @@ def get_sbs_media_list(collection="recently-added-movies"):
         cursor = base64.b64encode(json.dumps(cursor_dict).encode()).decode()
 
         response = requests.get(url, headers=headers, params={"cursor": cursor})
+        if response.status_code != 200:
+            print(f"Failed to fetch data: {response.status_code}")
+            break
+
         data = response.json()
-        print(f"Response data: ---{data}---")
 
         if not data.get("items"):
             print("No more items found, stopping.")
@@ -64,13 +68,10 @@ def get_sbs_media_list(collection="recently-added-movies"):
         media_list.extend(
             [
                 {
-                    "mediaType": item["entityType"],
+                    "mediaType": get_media_type(item),
                     "title": item["title"],
-                    "year": str(item["releaseYear"]),
-                    "sbsURL": "https://www.sbs.com.au/ondemand/movie/"
-                    + item["slug"]
-                    + "/"
-                    + str(item["mpxMediaID"]),
+                    "year": str(item["releaseYear"]) if "releaseYear" in item else None,
+                    "sbsURL": get_media_url(item),
                 }
                 for item in data["items"]
             ]
@@ -80,8 +81,34 @@ def get_sbs_media_list(collection="recently-added-movies"):
     return media_list
 
 
+def get_media_type(media):
+    entity_type = media["entityType"]
+    if entity_type == "MOVIE":
+        return "movie"
+    elif entity_type == "TV_SERIES":
+        return "show"
+    else:
+        print(f"Unknown entity type '{entity_type}' for item '{media['title']}'")
+        return "unknown"
+
+
+def get_media_url(media):
+    media_type = get_media_type(media)
+    if media_type == "movie":
+        return (
+            "https://www.sbs.com.au/ondemand/movie/"
+            + media["slug"]
+            + "/"
+            + str(media["mpxMediaID"])
+        )
+    elif media_type == "show":
+        return "https://www.sbs.com.au/ondemand/show/" + media["slug"]
+    else:
+        return None
+
+
 if __name__ == "__main__":
-    media_list = get_sbs_media_list("recently-added-movies")
+    media_list = get_sbs_media_list()
     print("media:", media_list)
 
 
@@ -271,5 +298,225 @@ if __name__ == "__main__":
 #       "Wolof"
 #     ],
 #     "subtitle": ["English (CC)"]
+#   }
+# }
+
+
+# Sample show data structure from the API:
+# {
+#   "id": "d0254adb-3a04-5b11-a9b3-8102886dc367",
+#   "entityType": "CURATED_COLLECTION",
+#   "localeID": "en",
+#   "title": "Bingeable Box Sets",
+#   "description": "Make the time fly with full seasons of your favourite shows. There's a genre to match every mood. ",
+#   "slug": "bingeable-box-sets",
+#   "displayType": "16x9",
+#   "layout": "GRID",
+#   "images": [
+#     {
+#       "id": "2ace917e-6a2d-5a75-93bf-6370863623c8",
+#       "category": "16:9|1920|1080|BANNER"
+#     },
+#     {
+#       "id": "d4050124-1fe0-5f85-bfbd-308e1b50853b",
+#       "category": "16:9|1920|1080|KEY_ART"
+#     },
+#     {
+#       "id": "06c96524-2db5-546b-bee0-0bd46aa74cff",
+#       "category": "1:1|700|700|MASK"
+#     },
+#     {
+#       "id": "c5cdce49-94c6-5c7d-893b-2bc4b798fadf",
+#       "category": "2:3|960|1440|BANNER"
+#     },
+#     {
+#       "id": "c5cdce49-94c6-5c7d-893b-2bc4b798fadf",
+#       "category": "2:3|960|1440|KEY_ART"
+#     }
+#   ],
+#   "items": [
+#     {
+#       "id": "c0ee228a-28c6-5a84-a6e5-053d0044f4cb",
+#       "entityType": "TV_SERIES",
+#       "title": "The People vs Robodebt",
+#       "slug": "the-people-vs-robodebt",
+#       "description": "Uncovers the human story of the notorious robodebt scandal and the Australians who took a stand.",
+#       "genres": ["Documentary", "Docudrama"],
+#       "languages": ["English"],
+#       "textTracks": [
+#         { "localeID": "ko", "language": "한국어", "type": "SUBTITLE" },
+#         { "localeID": "vi", "language": "Tiếng Việt", "type": "SUBTITLE" },
+#         { "localeID": "zh-Hans", "language": "简体中文", "type": "SUBTITLE" },
+#         { "localeID": "ar", "language": "العربية", "type": "SUBTITLE" },
+#         { "localeID": "zh-Hant", "language": "繁體中文", "type": "SUBTITLE" },
+#         { "localeID": "en", "language": "English", "type": "CAPTION" }
+#       ],
+#       "availability": {
+#         "start": "2025-09-23T16:00:00Z",
+#         "end": "2030-09-23T12:59:59Z"
+#       },
+#       "hasAudioDescription": true,
+#       "classificationID": "M",
+#       "images": [
+#         {
+#           "id": "af171460-8e8e-5de0-9020-f77454b64fbc",
+#           "category": "16:9|1920|1080|BANNER"
+#         }
+#       ],
+#       "distributors": [
+#         { "id": "20864", "name": "Cjz (Cordell Jigsaw Zapruder)" }
+#       ],
+#       "seasonCount": 1,
+#       "featured": {
+#         "id": "f1a79dc3-a39d-5f29-b540-e4fb5c5309b3",
+#         "entityType": "TV_EPISODE",
+#         "tagLine": "Start Here",
+#         "title": "Episode 1",
+#         "description": "When two young Australians suddenly receive debt letters demanding they pay Centrelink thousands of dollars, they don’t realise they’re caught up in what will become one of the biggest scandals in Australian history – Robodebt.",
+#         "duration": "PT53M3S",
+#         "availability": {
+#           "start": "2025-09-23T16:00:00Z",
+#           "end": "2030-09-23T12:59:59Z"
+#         },
+#         "hasAudioDescription": false,
+#         "mpxMediaID": 2448763971866,
+#         "images": [
+#           {
+#             "id": "29f5a463-3431-5204-805b-5f4523023d1c",
+#             "category": "16:9|3840|2160|KEY_ART"
+#           }
+#         ]
+#       }
+#     }
+#   ],
+#   "trailers": [],
+#   "meta": {
+#     "nextCursor": "eyJhdWRpbyI6IiIsImdlbnJlIjoiIiwibGFuZ3VhZ2UiOiIiLCJsaW1pdCI6IjEiLCJwYWdlIjoiMiIsInNvcnQiOiIiLCJzdWJ0aXRsZSI6IiIsInR5cGUiOiIifQ==",
+#     "count": 1,
+#     "total": 101
+#   },
+#   "filters": {
+#     "audio": ["Audio Description"],
+#     "type": ["TV Show"],
+#     "genre": [
+#       "Action",
+#       "Adventure",
+#       "Animated",
+#       "Biography",
+#       "Comedy",
+#       "Comedy drama",
+#       "Competition reality",
+#       "Cooking",
+#       "Crime",
+#       "Crime drama",
+#       "Dark comedy",
+#       "Docudrama",
+#       "Documentary",
+#       "Drama",
+#       "Fantasy",
+#       "Historical drama",
+#       "History",
+#       "Horror",
+#       "Miniseries",
+#       "Music",
+#       "Musical",
+#       "Mystery",
+#       "Nature",
+#       "Outdoors",
+#       "Politics",
+#       "Pro wrestling",
+#       "Romance",
+#       "Science fiction",
+#       "Sitcom",
+#       "Thriller",
+#       "Travel",
+#       "War",
+#       "Western"
+#     ],
+#     "language": [
+#       "Danish",
+#       "Dutch",
+#       "English",
+#       "Finnish",
+#       "French",
+#       "German",
+#       "Icelandic",
+#       "Italian",
+#       "Norwegian",
+#       "Polish",
+#       "Spanish",
+#       "Swedish"
+#     ],
+#     "subtitle": [
+#       "English (CC)",
+#       "Tiếng Việt",
+#       "العربية",
+#       "हिन्दी",
+#       "简体中文",
+#       "繁體中文",
+#       "한국어"
+#     ]
+#   },
+#   "allFilters": {
+#     "audio": ["Audio Description"],
+#     "type": ["TV Show"],
+#     "genre": [
+#       "Action",
+#       "Adventure",
+#       "Animated",
+#       "Biography",
+#       "Comedy",
+#       "Comedy drama",
+#       "Competition reality",
+#       "Cooking",
+#       "Crime",
+#       "Crime drama",
+#       "Dark comedy",
+#       "Docudrama",
+#       "Documentary",
+#       "Drama",
+#       "Fantasy",
+#       "Historical drama",
+#       "History",
+#       "Horror",
+#       "Miniseries",
+#       "Music",
+#       "Musical",
+#       "Mystery",
+#       "Nature",
+#       "Outdoors",
+#       "Politics",
+#       "Pro wrestling",
+#       "Romance",
+#       "Science fiction",
+#       "Sitcom",
+#       "Thriller",
+#       "Travel",
+#       "War",
+#       "Western"
+#     ],
+#     "language": [
+#       "Danish",
+#       "Dutch",
+#       "English",
+#       "Finnish",
+#       "French",
+#       "German",
+#       "Icelandic",
+#       "Italian",
+#       "Norwegian",
+#       "Polish",
+#       "Spanish",
+#       "Swedish"
+#     ],
+#     "subtitle": [
+#       "English (CC)",
+#       "Tiếng Việt",
+#       "العربية",
+#       "हिन्दी",
+#       "简体中文",
+#       "繁體中文",
+#       "한국어"
+#     ]
 #   }
 # }

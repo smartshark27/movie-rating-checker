@@ -12,10 +12,13 @@ def main():
     parser.add_argument(
         "media_source",
         choices=[
-            "abc-all-movies",
+            "abc-movies-a-z",
             "abc-movies-of-the-week",
-            "sbs-recently-added-movies",
-            "sbs-all-movies",
+            "abc-shows-comedy-gold",
+            "abc-shows-time-for-a-rewatch",
+            "sbs-movies-all",
+            "sbs-movies-recently-added",
+            "sbs-shows-bingeable-box-sets",
         ],
         help="The media source to check.",
     )
@@ -53,14 +56,11 @@ def main():
         sys.exit(1)
 
     media_list = []
-    if args.media_source == "abc-all-movies":
-        media_list = get_abc_media_list("all-movies")
-    if args.media_source == "abc-movies-of-the-week":
-        media_list = get_abc_media_list("movies-of-the-week")
-    elif args.media_source == "sbs-recently-added-movies":
-        media_list = get_sbs_media_list("recently-added-movies")
-    elif args.media_source == "sbs-all-movies":
-        media_list = get_sbs_media_list("all-movies")
+    media_source = args.media_source
+    if media_source.startswith("abc-"):
+        media_list = get_abc_media_list(media_source.replace("abc-", ""))
+    elif media_source.startswith("sbs-"):
+        media_list = get_sbs_media_list(media_source.replace("sbs-", ""))
 
     tmdb_media_list = get_tmdb_media_list(tmdb_api_key, media_list)
 
@@ -84,7 +84,7 @@ def main():
     create_dir_if_not_exists("output")
     output_file = "output/" + args.media_source.replace("-", "_") + "_with_tmdb.json"
     save_to_json_file(tmdb_media_list, output_file)
-    print(f"Saved {len(tmdb_media_list)} movies to {output_file}")
+    print(f"Saved {len(tmdb_media_list)} media to {output_file}")
 
     print("Done.")
 
