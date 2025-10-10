@@ -3,7 +3,7 @@
 
 ## Overview
 
-The `movie-rating-checker` CLI fetches movie lists from ABC iView and SBS, enriches them with TMDB ratings and popularity, and saves the results as JSON files. You can filter and sort the output using various criteria.
+The `movie-rating-checker` CLI fetches movie and show lists from ABC iView and SBS, enriches them with TMDB ratings and popularity, and saves the results as JSON files. You can filter and sort the output using various criteria.
 
 ## Prerequisites
 
@@ -25,47 +25,52 @@ pip install -r requirements.txt
 Run the CLI script with:
 
 ```bash
-python src/cli.py <media_source> [--tmdb-api-key <key>] [--sort-by <criteria>] [--min-rating-count <count>]
+python src/cli.py <media_source> [--tmdb-api-key <key>] [--sort-by <criteria>] [--min-rating <rating>] [--min-rating-count <count>]
 ```
 
 ### Positional Arguments
 
-- `media_source`: The source of movies to check. Options:
-    - `abc-all-movies`: All movies from ABC iView
-    - `abc-movies-of-the-week`: ABC iView Movies of the Week
-    - `sbs-recently-added-movies`: Recently added movies from SBS
-    - `sbs-all-movies`: All movies from SBS
+- `media_source`: The source of movies or shows to check. Options:
+        - `abc-movies-a-z`: All movies from ABC iView (A-Z)
+        - `abc-movies-of-the-week`: ABC iView Movies of the Week
+        - `abc-shows-comedy-gold`: ABC iView Comedy Gold shows
+        - `abc-shows-time-for-a-rewatch`: ABC iView Time For a Rewatch shows
+        - `sbs-movies-all`: All movies from SBS
+        - `sbs-movies-recently-added`: Recently added movies from SBS
+        - `sbs-shows-all`: All shows from SBS
+        - `sbs-shows-bingeable-box-sets`: SBS Bingeable Box Sets
 
 ### Optional Arguments
 
 - `--tmdb-api-key`: Your TMDB API key. If not provided, the script uses the `TMDB_API_KEY` environment variable.
 - `--sort-by`: Sort criteria. Options:
-    - `tmdb-rating` (default): Sort by TMDB rating
-    - `tmdb-rating-count`: Sort by number of TMDB ratings
-    - `tmdb-popularity`: Sort by TMDB popularity
-- `--min-rating-count`: Minimum number of ratings required to include a movie in the output. Default is `100`.
+        - `tmdb-rating` (default): Sort by TMDB rating
+        - `tmdb-rating-count`: Sort by number of TMDB ratings
+        - `tmdb-popularity`: Sort by TMDB popularity
+- `--min-rating`: Minimum TMDB rating required to include a movie/show in the output. Default is `7`.
+- `--min-rating-count`: Minimum number of ratings required to include a movie/show in the output. Default is `100`.
 
 ## Examples
 
-1. Fetch all ABC iView movies and sort by TMDB rating:
+1. Fetch all ABC iView movies (A-Z) and sort by TMDB rating:
         ```bash
-        python src/cli.py abc-all-movies --tmdb-api-key YOUR_API_KEY
+        python src/cli.py abc-movies-a-z --tmdb-api-key YOUR_API_KEY
         ```
 
 2. Fetch SBS recently added movies, sort by popularity, and set a minimum rating count of 500:
         ```bash
-        python src/cli.py sbs-recently-added-movies --tmdb-api-key YOUR_API_KEY --sort-by tmdb-popularity --min-rating-count 500
+        python src/cli.py sbs-movies-recently-added --tmdb-api-key YOUR_API_KEY --sort-by tmdb-popularity --min-rating-count 500
         ```
 
-3. Use the `TMDB_API_KEY` environment variable:
+3. Use the `TMDB_API_KEY` environment variable and filter for a minimum rating of 8:
         ```bash
         export TMDB_API_KEY=YOUR_API_KEY
-        python src/cli.py abc-movies-of-the-week
+        python src/cli.py abc-shows-comedy-gold --min-rating 8
         ```
 
 ## Output
 
-The script saves the enriched movie data as a JSON file in the `output/` directory. The file name is based on the `media_source` argument, e.g., `output/abc_all_movies_with_tmdb.json`.
+The script saves the enriched movie or show data as a JSON file in the `output/` directory. The file name is based on the `media_source` argument, e.g., `output/abc_movies_a_z_with_tmdb.json`.
 
 ## Notes
 

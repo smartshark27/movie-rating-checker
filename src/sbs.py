@@ -8,6 +8,7 @@ import requests
 collection_urls = {
     "movies-all": "https://catalogue.pr.sbsod.com/collections/all-movies",
     "movies-recently-added": "https://catalogue.pr.sbsod.com/collections/recently-added-movies",
+    "shows-all": "https://catalogue.pr.sbsod.com/collections/all-tv-shows",
     "shows-bingeable-box-sets": "https://catalogue.pr.sbsod.com/collections/bingeable-box-sets",
 }
 headers = {
@@ -102,7 +103,7 @@ def get_media_url(media):
             + str(media["mpxMediaID"])
         )
     elif media_type == "show":
-        return "https://www.sbs.com.au/ondemand/show/" + media["slug"]
+        return "https://www.sbs.com.au/ondemand/tv-series/" + media["slug"]
     else:
         return None
 

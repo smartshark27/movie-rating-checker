@@ -18,6 +18,7 @@ def main():
             "abc-shows-time-for-a-rewatch",
             "sbs-movies-all",
             "sbs-movies-recently-added",
+            "sbs-shows-all",
             "sbs-shows-bingeable-box-sets",
         ],
         help="The media source to check.",

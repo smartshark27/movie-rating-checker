@@ -4,8 +4,8 @@ from utils import create_dir_if_not_exists, read_json_file, save_to_json_file
 
 tmdb_movie_search_url = "https://api.themoviedb.org/3/search/movie"
 tmdb_movie_lookup_url = "https://api.themoviedb.org/3/movie"
-tmdb_show_lookup_url = "https://api.themoviedb.org/3/tv"
 tmdb_show_search_url = "https://api.themoviedb.org/3/search/tv"
+tmdb_show_lookup_url = "https://api.themoviedb.org/3/tv"
 
 
 def get_tmdb_media_list(api_key, media_list):
