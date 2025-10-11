@@ -6,8 +6,10 @@ import requests
 collection_urls = {
     "movies-a-z": "https://api.iview.abc.net.au/v3/collection/2711",
     "movies-of-the-week": "https://api.iview.abc.net.au/v3/collection/4028",
+    "shows-best-of-british-tv": "https://api.iview.abc.net.au/v3/collection/3644",
     "shows-comedy-gold": "https://api.iview.abc.net.au/v3/collection/2011",
     "shows-time-for-a-rewatch": "https://api.iview.abc.net.au/v3/collection/4048",
+    "shows-tv-shows-for-big-kids": "https://api.iview.abc.net.au/v3/collection/3664",
 }
 headers = {
     "User-Agent": "Mozilla/5.0",

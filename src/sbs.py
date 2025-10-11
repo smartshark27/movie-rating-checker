@@ -10,6 +10,7 @@ collection_urls = {
     "movies-recently-added": "https://catalogue.pr.sbsod.com/collections/recently-added-movies",
     "shows-all": "https://catalogue.pr.sbsod.com/collections/all-tv-shows",
     "shows-bingeable-box-sets": "https://catalogue.pr.sbsod.com/collections/bingeable-box-sets",
+    "shows-recently-added": "https://catalogue.pr.sbsod.com/collections/recently-added",
 }
 headers = {
     "Accept": "*/*",

@@ -4,7 +4,12 @@ import sys
 from abciview import get_abc_media_list
 from sbs import get_sbs_media_list
 from tmdb import get_tmdb_media_list
-from utils import create_dir_if_not_exists, read_json_file, save_to_json_file
+from utils import (
+    create_dir_if_not_exists,
+    delete_dir_if_exists,
+    read_json_file,
+    save_to_json_file,
+)
 
 
 def main():
@@ -15,12 +20,16 @@ def main():
         choices=[
             "abc-movies-a-z",
             "abc-movies-of-the-week",
+            "abc-shows-best-of-british-tv",
             "abc-shows-comedy-gold",
             "abc-shows-time-for-a-rewatch",
+            "abc-shows-timeless-tv-classics",
+            "abc-shows-tv-shows-for-big-kids",
             "sbs-movies-all",
             "sbs-movies-recently-added",
             "sbs-shows-all",
             "sbs-shows-bingeable-box-sets",
+            "sbs-shows-recently-added",
         ],
         help="The media sources to check. You can specify multiple sources separated by spaces.",
     )
@@ -93,8 +102,10 @@ def main():
         tmdb_media_list.sort(key=lambda x: x.get("tmdbPopularity", 0), reverse=True)
 
     # Save to output file
-    create_dir_if_not_exists("output")
-    all_output_file = "output/all-media.json"
+    output_dir = "output"
+    delete_dir_if_exists(output_dir)
+    create_dir_if_not_exists(output_dir)
+    all_output_file = f"{output_dir}/all-media.json"
     save_to_json_file(tmdb_media_list, all_output_file)
     print(f"Saved {len(tmdb_media_list)} media to {all_output_file}")
 
@@ -114,7 +125,7 @@ def main():
             m for m in tmdb_media_list if m["title"] not in previous_titles
         ]
         if new_additions:
-            new_output_file = "output/new-media.json"
+            new_output_file = f"{output_dir}/new-media.json"
             save_to_json_file(new_additions, new_output_file)
             print(f"Saved {len(new_additions)} new media to {new_output_file}")
         else:

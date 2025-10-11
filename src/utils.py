@@ -13,6 +13,19 @@ def create_dir_if_not_exists(directory):
         os.makedirs(directory)
 
 
+def delete_dir_if_exists(directory):
+    """
+    Delete a directory if it exists.
+
+    :param directory: Directory path to delete
+    """
+    import shutil
+    import os
+
+    if os.path.exists(directory):
+        shutil.rmtree(directory)
+
+
 def read_json_file(filename):
     """
     Read a JSON file and return its content.
