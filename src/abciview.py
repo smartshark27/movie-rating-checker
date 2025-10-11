@@ -4,7 +4,7 @@ import requests
 # It uses the public API endpoint to retrieve movie data.
 
 collection_urls = {
-    "movies-all": "https://api.iview.abc.net.au/v3/collection/2711",
+    "movies-a-z": "https://api.iview.abc.net.au/v3/collection/2711",
     "movies-of-the-week": "https://api.iview.abc.net.au/v3/collection/4028",
     "shows-comedy-gold": "https://api.iview.abc.net.au/v3/collection/2011",
     "shows-time-for-a-rewatch": "https://api.iview.abc.net.au/v3/collection/4048",

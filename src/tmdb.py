@@ -1,4 +1,5 @@
-import requests
+import asyncio
+import aiohttp
 
 from utils import create_dir_if_not_exists, read_json_file, save_to_json_file
 
@@ -8,35 +9,47 @@ tmdb_show_search_url = "https://api.themoviedb.org/3/search/tv"
 tmdb_show_lookup_url = "https://api.themoviedb.org/3/tv"
 
 
+CONCURRENCY = 40  # Max concurrent requests to TMDB API
+
+
 def get_tmdb_media_list(api_key, media_list):
     """
-    Get TMDB details for a list of media items.
+    Get TMDB details for a list of media items in parallel (up to 40 concurrent requests).
     Each item in media_list must be a dict with 'mediaType', 'title' and optional 'year'.
     """
+    return asyncio.run(_get_tmdb_media_list_async(api_key, media_list))
+
+
+async def _get_tmdb_media_list_async(api_key, media_list):
     cache = load_cache("cache/tmdb.json")
+    semaphore = asyncio.Semaphore(CONCURRENCY)
     tmdb_media_list = []
-    for media in media_list:
-        tmdb_media = {}
 
-        # Lookup in cache first because TMDB is slow
-        cache_key = (
-            f"{media['mediaType']}-{media['title']}-{media.get('year', 'noyear')}"
-        )
-        cached = lookup_cache(cache, cache_key)
-        if cached:
-            print(f"Using cached TMDB data for key '{cache_key}'")
-            tmdb_media = cached
-        else:
-            tmdb_media = get_media_from_tmdb(api_key, media, cache_key)
-            if tmdb_media:
-                cache.append(tmdb_media)
+    async with aiohttp.ClientSession() as session:
 
-        tmdb_media_list.append({**media, **(tmdb_media or {})})
+        async def process_media(media):
+            tmdb_media = {}
+            cache_key = (
+                f"{media['mediaType']}-{media['title']}-{media.get('year', 'noyear')}"
+            )
+            cached = lookup_cache(cache, cache_key)
+            if cached:
+                print(f"Using cached TMDB data for key '{cache_key}'")
+                tmdb_media = cached
+            else:
+                tmdb_media = await get_media_from_tmdb_async(
+                    api_key, media, cache_key, session, semaphore
+                )
+                if tmdb_media:
+                    cache.append(tmdb_media)
+            return {**media, **(tmdb_media or {})}
+
+        tasks = [process_media(media) for media in media_list]
+        tmdb_media_list = await asyncio.gather(*tasks)
 
     # Save updated cache
     create_dir_if_not_exists("cache")
     save_to_json_file(cache, "cache/tmdb.json")
-
     return tmdb_media_list
 
 
@@ -63,13 +76,13 @@ def lookup_cache(cache, cache_key):
     )
 
 
-def get_media_from_tmdb(api_key, media, cache_key):
+async def get_media_from_tmdb_async(api_key, media, cache_key, session, semaphore):
     """
-    Get TMDB movie details by title and optional year.
+    Async: Get TMDB movie/show details by title and optional year.
     """
     title = media["title"]
     year = media.get("year")
-    search_results = query_tmdb(api_key, media)
+    search_results = await query_tmdb_async(api_key, media, session, semaphore)
     if not search_results:
         print(f"No TMDB results found for '{title}' ({year})")
         return {
@@ -84,8 +97,19 @@ def get_media_from_tmdb(api_key, media, cache_key):
 
     # Use the first search result
     tmdb_id = search_results[0]["id"]
-    tmdb_media = lookup_tmdb(api_key, media["mediaType"], tmdb_id)
-
+    tmdb_media = await lookup_tmdb_async(
+        api_key, media["mediaType"], tmdb_id, session, semaphore
+    )
+    if not tmdb_media:
+        return {
+            "cacheKey": cache_key,
+            "title": title,
+            "year": year,
+            "tmdbPopularity": 0,
+            "tmdbRating": 0,
+            "tmdbRatingCount": 0,
+            "imdbID": None,
+        }
     return {
         "cacheKey": cache_key,
         "title": (
@@ -101,9 +125,9 @@ def get_media_from_tmdb(api_key, media, cache_key):
     }
 
 
-def query_tmdb(api_key, media):
+async def query_tmdb_async(api_key, media, session, semaphore):
     """
-    Query TMDB for movies by title and optional year.
+    Async: Query TMDB for movies/shows by title and optional year.
     """
     title = media["title"]
     media_type = media["mediaType"]
@@ -120,29 +144,30 @@ def query_tmdb(api_key, media):
     if year:
         params["year"] = year
 
-    return (
-        requests.get(
-            tmdb_movie_search_url if media_type == "movie" else tmdb_show_search_url,
-            params=params,
-        )
-        .json()
-        .get("results", [])
-    )
+    url = tmdb_movie_search_url if media_type == "movie" else tmdb_show_search_url
+    async with semaphore:
+        async with session.get(url, params=params) as resp:
+            if resp.status != 200:
+                print(f"TMDB search failed for '{title}': {resp.status}")
+                return []
+            data = await resp.json()
+            return data.get("results", [])
 
 
-def lookup_tmdb(api_key, media_type, tmdb_id):
+async def lookup_tmdb_async(api_key, media_type, tmdb_id, session, semaphore):
     """
-    Lookup a movie by its TMDB ID.
+    Async: Lookup a movie/show by its TMDB ID.
     """
     url = tmdb_movie_lookup_url if media_type == "movie" else tmdb_show_lookup_url
     url += f"/{tmdb_id}"
 
     print(f"Looking up TMDB ID {tmdb_id} at URL {url}...")
-    response = requests.get(url, params={"api_key": api_key})
-    if response.status_code != 200:
-        print(f"TMDB lookup failed for ID {tmdb_id}: {response.status_code}")
-        return None
-    return response.json()
+    async with semaphore:
+        async with session.get(url, params={"api_key": api_key}) as resp:
+            if resp.status != 200:
+                print(f"TMDB lookup failed for ID {tmdb_id}: {resp.status}")
+                return None
+            return await resp.json()
 
 
 # Sample TMDB TV show data structure from the API:
