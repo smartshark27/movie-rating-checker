@@ -10,7 +10,8 @@ from utils import create_dir_if_not_exists, save_to_json_file
 def main():
     parser = argparse.ArgumentParser(description="Movie Rating Checker CLI")
     parser.add_argument(
-        "media_source",
+        "media_sources",
+        nargs="*",
         choices=[
             "abc-movies-a-z",
             "abc-movies-of-the-week",
@@ -21,7 +22,7 @@ def main():
             "sbs-shows-all",
             "sbs-shows-bingeable-box-sets",
         ],
-        help="The media source to check.",
+        help="The media sources to check. You can specify multiple sources separated by spaces.",
     )
     parser.add_argument(
         "--tmdb-api-key",
@@ -57,11 +58,11 @@ def main():
         sys.exit(1)
 
     media_list = []
-    media_source = args.media_source
-    if media_source.startswith("abc-"):
-        media_list = get_abc_media_list(media_source.replace("abc-", ""))
-    elif media_source.startswith("sbs-"):
-        media_list = get_sbs_media_list(media_source.replace("sbs-", ""))
+    for source in args.media_sources:
+        if source.startswith("abc-"):
+            media_list.extend(get_abc_media_list(source.replace("abc-", "")))
+        elif source.startswith("sbs-"):
+            media_list.extend(get_sbs_media_list(source.replace("sbs-", "")))
 
     tmdb_media_list = get_tmdb_media_list(tmdb_api_key, media_list)
 
@@ -83,7 +84,7 @@ def main():
 
     # Save to output file
     create_dir_if_not_exists("output")
-    output_file = "output/" + args.media_source.replace("-", "_") + "_with_tmdb.json"
+    output_file = "output/media.json"
     save_to_json_file(tmdb_media_list, output_file)
     print(f"Saved {len(tmdb_media_list)} media to {output_file}")
 
