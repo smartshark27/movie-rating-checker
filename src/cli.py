@@ -4,7 +4,7 @@ import sys
 from abciview import get_abc_media_list
 from sbs import get_sbs_media_list
 from tmdb import get_tmdb_media_list
-from utils import create_dir_if_not_exists, save_to_json_file
+from utils import create_dir_if_not_exists, read_json_file, save_to_json_file
 
 
 def main():
@@ -57,6 +57,7 @@ def main():
         )
         sys.exit(1)
 
+    # Get media list from specified sources
     media_list = []
     for source in args.media_sources:
         if source.startswith("abc-"):
@@ -65,6 +66,15 @@ def main():
             media_list.extend(get_sbs_media_list(source.replace("sbs-", "")))
 
     tmdb_media_list = get_tmdb_media_list(tmdb_api_key, media_list)
+
+    # Remove duplicates based on title
+    seen_titles = set()
+    unique_tmdb_media_list = []
+    for media in tmdb_media_list:
+        if media["title"] not in seen_titles:
+            unique_tmdb_media_list.append(media)
+            seen_titles.add(media["title"])
+    tmdb_media_list = unique_tmdb_media_list
 
     # Filter by minimum rating count
     tmdb_media_list = [
@@ -84,9 +94,37 @@ def main():
 
     # Save to output file
     create_dir_if_not_exists("output")
-    output_file = "output/media.json"
-    save_to_json_file(tmdb_media_list, output_file)
-    print(f"Saved {len(tmdb_media_list)} media to {output_file}")
+    all_output_file = "output/all-media.json"
+    save_to_json_file(tmdb_media_list, all_output_file)
+    print(f"Saved {len(tmdb_media_list)} media to {all_output_file}")
+
+    # Load previous output if exists
+    previous_output_file = "cache/previous-media.json"
+    if os.path.exists(previous_output_file):
+        previous_media_list = []
+        try:
+            previous_media_list = read_json_file(previous_output_file)
+            print(f"Loaded {len(previous_media_list)} items from previous output")
+        except Exception as e:
+            print(f"Error loading previous output: {e}")
+
+        # Find new additions
+        previous_titles = {m["title"] for m in previous_media_list}
+        new_additions = [
+            m for m in tmdb_media_list if m["title"] not in previous_titles
+        ]
+        if new_additions:
+            new_output_file = "output/new-media.json"
+            save_to_json_file(new_additions, new_output_file)
+            print(f"Saved {len(new_additions)} new media to {new_output_file}")
+        else:
+            print("No new media found since last run.")
+    else:
+        print("No previous output found, skipping new media check.")
+
+    # Save current output as previous for next run
+    create_dir_if_not_exists("cache")
+    save_to_json_file(tmdb_media_list, previous_output_file)
 
     print("Done.")
 
