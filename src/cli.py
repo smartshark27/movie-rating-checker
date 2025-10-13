@@ -39,22 +39,34 @@ def main():
         help="The TMDB API key. If not provided, it will be fetched from the TMDB_API_KEY environment variable.",
     )
     parser.add_argument(
+        "--movies-min-rating",
+        type=float,
+        default=7.0,
+        help="Minimum TMDB rating for movies to include. Default is 7.0.",
+    )
+    parser.add_argument(
+        "--movies-min-rating-count",
+        type=int,
+        default=300,
+        help="Minimum TMDB rating count for movies to include. Default is 300.",
+    )
+    parser.add_argument(
+        "--shows-min-rating",
+        type=float,
+        default=7.0,
+        help="Minimum TMDB rating for shows to include. Default is 7.0.",
+    )
+    parser.add_argument(
+        "--shows-min-rating-count",
+        type=int,
+        default=300,
+        help="Minimum TMDB rating count for shows to include. Default is 300.",
+    )
+    parser.add_argument(
         "--sort-by",
         choices=["tmdb-rating", "tmdb-rating-count", "tmdb-popularity"],
         default="tmdb-rating",
         help="Sort the movies by 'tmdb-rating' or 'tmdb-popularity'. Default is 'tmdb-rating'.",
-    )
-    parser.add_argument(
-        "--min-rating",
-        type=int,
-        default=7,
-        help="Minimum rating to include a movie in the output. Default is 7.",
-    )
-    parser.add_argument(
-        "--min-rating-count",
-        type=int,
-        default=100,
-        help="Minimum number of ratings to include a movie in the output. Default is 100.",
     )
     args = parser.parse_args()
 
@@ -74,23 +86,33 @@ def main():
         elif source.startswith("sbs-"):
             media_list.extend(get_sbs_media_list(source.replace("sbs-", "")))
 
+    # Enrich media list with TMDB data
     tmdb_media_list = get_tmdb_media_list(tmdb_api_key, media_list)
 
-    # Remove duplicates based on title
-    seen_titles = set()
+    # Remove duplicates based on mediaType and title
+    seen_media = set()
     unique_tmdb_media_list = []
     for media in tmdb_media_list:
-        if media["title"] not in seen_titles:
+        media_key = (media["mediaType"], media["title"])
+        if media_key not in seen_media:
             unique_tmdb_media_list.append(media)
-            seen_titles.add(media["title"])
+            seen_media.add(media_key)
     tmdb_media_list = unique_tmdb_media_list
 
     # Filter by minimum rating count
     tmdb_media_list = [
         m
         for m in tmdb_media_list
-        if m.get("tmdbRatingCount", 0) >= args.min_rating_count
-        and m.get("tmdbRating", 0) >= args.min_rating
+        if (
+            m["mediaType"] == "movie"
+            and m.get("tmdbRating", 0) >= args.movies_min_rating
+            and m.get("tmdbRatingCount", 0) >= args.movies_min_rating_count
+        )
+        or (
+            m["mediaType"] == "show"
+            and m.get("tmdbRating", 0) >= args.shows_min_rating
+            and m.get("tmdbRatingCount", 0) >= args.shows_min_rating_count
+        )
     ]
 
     # Sort the movies

@@ -1,0 +1,1 @@
+python3 src/cli.py abc-movies-of-the-week abc-shows-best-of-british-tv abc-shows-comedy-gold abc-shows-time-for-a-rewatch abc-shows-timeless-tv-classics abc-shows-tv-shows-for-big-kids sbs-movies-recently-added sbs-shows-bingeable-box-sets sbs-shows-recently-added

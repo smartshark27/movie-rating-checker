@@ -9,6 +9,7 @@ collection_urls = {
     "shows-best-of-british-tv": "https://api.iview.abc.net.au/v3/collection/3644",
     "shows-comedy-gold": "https://api.iview.abc.net.au/v3/collection/2011",
     "shows-time-for-a-rewatch": "https://api.iview.abc.net.au/v3/collection/4048",
+    "shows-timeless-tv-classics": "https://api.iview.abc.net.au/v3/collection/4154",
     "shows-tv-shows-for-big-kids": "https://api.iview.abc.net.au/v3/collection/3664",
 }
 headers = {
