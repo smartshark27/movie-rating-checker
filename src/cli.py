@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+from tenplay import get_10play_media_list
 from abciview import get_abc_media_list
 from sbs import get_sbs_media_list
 from tmdb import get_tmdb_media_list
@@ -18,6 +19,7 @@ def main():
         "media_sources",
         nargs="*",
         choices=[
+            "10play-movies",
             "abc-movies-a-z",
             "abc-movies-of-the-week",
             "abc-shows-best-of-british-tv",
@@ -85,6 +87,8 @@ def main():
             media_list.extend(get_abc_media_list(source.replace("abc-", "")))
         elif source.startswith("sbs-"):
             media_list.extend(get_sbs_media_list(source.replace("sbs-", "")))
+        elif source.startswith("10play-"):
+            media_list.extend(get_10play_media_list(source.replace("10play-", "")))
 
     # Enrich media list with TMDB data
     tmdb_media_list = get_tmdb_media_list(tmdb_api_key, media_list)
