@@ -20,6 +20,9 @@ def main():
         nargs="*",
         choices=[
             "10play-movies",
+            "10play-shows-comedy",
+            "10play-shows-drama",
+            "10play-shows-kids",
             "abc-movies-a-z",
             "abc-movies-of-the-week",
             "abc-shows-best-of-british-tv",

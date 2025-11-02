@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 
 collection_urls = {
     "movies": "https://10.com.au/shows/movie",
+    "shows-comedy": "https://10.com.au/shows/comedy",
+    "shows-drama": "https://10.com.au/shows/drama",
+    "shows-kids": "https://10.com.au/shows/kids",
 }
 
 
@@ -48,7 +51,7 @@ def get_10play_media_list(collection="movies"):
 
         media_list = [
             {
-                "mediaType": "movie",
+                "mediaType": "movie" if "Movies" in item["genres"] else "show",
                 "title": item["name"],
                 "10PlayURL": item["url"],
             }
