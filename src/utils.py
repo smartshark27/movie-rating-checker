@@ -26,6 +26,17 @@ def delete_dir_if_exists(directory):
         shutil.rmtree(directory)
 
 
+def read_text_file(filename):
+    """
+    Read a text file and return its content.
+
+    :param filename: Name of the text file
+    :return: Content of the text file
+    """
+    with open(filename, "r", encoding="utf-8") as f:
+        return f.read()
+
+
 def read_json_file(filename):
     """
     Read a JSON file and return its content.

@@ -58,7 +58,7 @@ def get_10play_media_list(collection="movies"):
             for item in data
         ]
 
-        print(f"Total media found: {len(media_list)}")
+        print(f"Total media found from 10play: {len(media_list)}")
         return media_list
     else:
         print(f"Failed to fetch the page. Status code: {response.status_code}")

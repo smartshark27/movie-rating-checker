@@ -84,7 +84,7 @@ async def get_media_from_tmdb_async(api_key, media, cache_key, session, semaphor
     year = media.get("year")
     search_results = await query_tmdb_async(api_key, media, session, semaphore)
     if not search_results:
-        print(f"No TMDB results found for '{title}' ({year})")
+        print(f"No TMDB results found for '{title}' ({year}) {media['mediaType']}")
         return {
             "cacheKey": cache_key,
             "title": title,

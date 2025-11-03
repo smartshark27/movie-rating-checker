@@ -40,7 +40,7 @@ def get_abc_media_list(collection="movies-of-the-week"):
         for media in response.json()["items"]
     ]
 
-    print(f"Total media found: {len(media_list)}")
+    print(f"Total media found from ABC iView: {len(media_list)}")
     return media_list
 
 

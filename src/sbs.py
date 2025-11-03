@@ -79,7 +79,7 @@ def get_sbs_media_list(collection="recently-added-movies"):
             ]
         )
 
-    print(f"Total media found: {len(media_list)}")
+    print(f"Total media found from SBS On Demand: {len(media_list)}")
     return media_list
 
 

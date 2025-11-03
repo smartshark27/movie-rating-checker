@@ -5,10 +5,12 @@ from tenplay import get_10play_media_list
 from abciview import get_abc_media_list
 from sbs import get_sbs_media_list
 from tmdb import get_tmdb_media_list
+from tubi import get_tubi_media_list
 from utils import (
     create_dir_if_not_exists,
     delete_dir_if_exists,
     read_json_file,
+    read_text_file,
     save_to_json_file,
 )
 
@@ -35,13 +37,23 @@ def main():
             "sbs-shows-all",
             "sbs-shows-bingeable-box-sets",
             "sbs-shows-recently-added",
+            "tubi-award-winners-and-nominees",
+            "tubi-cult-classics",
+            "tubi-most-popular",
+            "tubi-recently-added",
+            "tubi-trending-now",
         ],
         help="The media sources to check. You can specify multiple sources separated by spaces.",
     )
     parser.add_argument(
         "--tmdb-api-key",
         type=str,
-        help="The TMDB API key. If not provided, it will be fetched from the TMDB_API_KEY environment variable.",
+        help="The TMDB API key. If not provided, it will be read from input/tmdb_api_key.txt.",
+    )
+    parser.add_argument(
+        "--tubi-access-token",
+        type=str,
+        help="The Tubi access token. If not provided, it will be read from input/tubi_access_token.txt.",
     )
     parser.add_argument(
         "--movies-min-rating",
@@ -76,22 +88,38 @@ def main():
     args = parser.parse_args()
 
     # Get the TMDB API key
-    tmdb_api_key = args.tmdb_api_key or os.getenv("TMDB_API_KEY")
+    tmdb_api_key = args.tmdb_api_key or read_text_file("input/tmdb_api_key.txt").strip()
     if not tmdb_api_key:
         print(
-            "Error: TMDB API key is required. Provide it via --tmdb-api-key or set the TMDB_API_KEY environment variable."
+            "Error: TMDB API key is required. Provide it via --tmdb-api-key or in input/tmdb_api_key.txt"
         )
         sys.exit(1)
+
+    # Get Tubi access token if needed
+    if any(source.startswith("tubi-") for source in args.media_sources):
+        tubi_access_token = read_text_file("input/tubi_access_token.txt").strip()
+        if not tubi_access_token:
+            print(
+                "Error: Tubi access token is required for Tubi media sources. Please save it in input/tubi_access_token.txt"
+            )
+            sys.exit(1)
 
     # Get media list from specified sources
     media_list = []
     for source in args.media_sources:
-        if source.startswith("abc-"):
+        if source.startswith("10play-"):
+            media_list.extend(get_10play_media_list(source.replace("10play-", "")))
+        elif source.startswith("abc-"):
             media_list.extend(get_abc_media_list(source.replace("abc-", "")))
         elif source.startswith("sbs-"):
             media_list.extend(get_sbs_media_list(source.replace("sbs-", "")))
-        elif source.startswith("10play-"):
-            media_list.extend(get_10play_media_list(source.replace("10play-", "")))
+        elif source.startswith("tubi-"):
+            media_list.extend(
+                get_tubi_media_list(
+                    access_token=tubi_access_token,
+                    collection=source.replace("tubi-", ""),
+                )
+            )
 
     # Enrich media list with TMDB data
     tmdb_media_list = get_tmdb_media_list(tmdb_api_key, media_list)
