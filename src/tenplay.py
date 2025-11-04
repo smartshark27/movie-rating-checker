@@ -3,6 +3,8 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
+# TODO: Try use an API because this currently just gets the first 12 of each collection
+
 collection_urls = {
     "movies": "https://10.com.au/shows/movie",
     "shows-comedy": "https://10.com.au/shows/comedy",
@@ -62,6 +64,7 @@ def get_10play_media_list(collection="movies"):
         return media_list
     else:
         print(f"Failed to fetch the page. Status code: {response.status_code}")
+        raise ConnectionError("Failed to fetch 10play collection page")
 
 
 if __name__ == "__main__":
