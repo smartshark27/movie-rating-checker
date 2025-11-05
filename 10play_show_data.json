@@ -1,0 +1,724 @@
+{
+    "hasMore": true,
+    "items": [
+        {
+            "id": 1396951,
+            "epgData": {
+                "seriesCridId": [
+                    "83520"
+                ]
+            },
+            "tpId": "MTU5NjkzMQ==",
+            "name": "Curfew",
+            "url": "https://10.com.au/curfew",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2025/10/13/f02b2814473fc6694a71bef0f0db732a-1396957.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/10/13/f02b2814473fc6694a71bef0f0db732a-1396957.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2025/10/13/3463c17688780481b2231d5a3f4b3df4-1396955.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/10/13/3463c17688780481b2231d5a3f4b3df4-1396955.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "None",
+            "aliases": [],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "curfew"
+            },
+            "videoCount": {
+                "episodesCount": 6,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "type": "standard"
+        },
+        {
+            "id": 1392183,
+            "epgData": {
+                "seriesCridId": [
+                    "82956"
+                ]
+            },
+            "tpId": "MTgxMjkzMw==",
+            "name": "The Gilded Age",
+            "url": "https://10.com.au/the-gilded-age",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2025/09/01/c29391b20511424d75c12805e91484c9-1392189.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/09/01/c29391b20511424d75c12805e91484c9-1392189.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2025/09/01/4b3403b7f4de9cf727edbb4cab0e2714-1392187.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/09/01/4b3403b7f4de9cf727edbb4cab0e2714-1392187.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "M",
+            "aliases": [],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "the_gilded_age"
+            },
+            "videoCount": {
+                "episodesCount": 8,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "type": "standard"
+        },
+        {
+            "id": 1376684,
+            "epgData": {
+                "seriesCridId": [
+                    "82617",
+                    "82618",
+                    "82636",
+                    "82637",
+                    "82638",
+                    "82639"
+                ]
+            },
+            "tpId": "MTg2NjczNA==",
+            "name": "Numb3rs",
+            "url": "https://10.com.au/numb3rs",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2025/04/29/60dd82aa8fbb437821f14b408891f9e4-1376717.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/04/29/60dd82aa8fbb437821f14b408891f9e4-1376717.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2025/04/29/3362843143e84ede5fb0c407ccc5f978-1376715.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/04/29/3362843143e84ede5fb0c407ccc5f978-1376715.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "M",
+            "aliases": [],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "numb3rs"
+            },
+            "videoCount": {
+                "episodesCount": 118,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "hasClosedCaptions": "yes",
+            "type": "standard"
+        },
+        {
+            "id": 216770,
+            "epgData": {
+                "seriesCridId": [
+                    "67736",
+                    "17255"
+                ]
+            },
+            "tpId": "Mjc3NjEw",
+            "name": "The Bold and The Beautiful Fast-Tracked",
+            "url": "https://10.com.au/the-bold-and-the-beautiful-fast-tracked",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [
+                "Soap Opera"
+            ],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2024/06/06/22ba54a9f746522edc2d9460c8adf5fb-1319002.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/06/06/22ba54a9f746522edc2d9460c8adf5fb-1319002.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2024/06/06/c54996671010d2f20e353cfbf70f3048-1318999.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/06/06/c54996671010d2f20e353cfbf70f3048-1318999.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "PG",
+            "aliases": [
+                "the bold and the beautiful fast tracked",
+                "The Bold and The Beautiful Fast Tracked",
+                "The Bold and The Beautiful Fast-Tracked Encore",
+                "The Bold and The Beautiful Fast-Tracked"
+            ],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": true,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "the_bold_and_the_beautiful_fast_tracked"
+            },
+            "videoCount": {
+                "episodesCount": 249,
+                "extrasCount": 2,
+                "otherCount": 0
+            },
+            "hasClosedCaptions": "yes",
+            "type": "daily"
+        },
+        {
+            "id": 1317076,
+            "epgData": {
+                "seriesCridId": [
+                    "799761",
+                    "80036",
+                    "799961"
+                ]
+            },
+            "tpId": "MTcwNzEzNg==",
+            "name": "Days of our Lives Fast-Tracked",
+            "url": "https://10.com.au/days-of-our-lives-fast-tracked",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [
+                "Soap Opera"
+            ],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2024/05/28/06b15ff5915a6326c03ab151741c766f-1317083.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/05/28/06b15ff5915a6326c03ab151741c766f-1317083.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2024/05/28/c07055b0fbde21fa0b5153e5a021ef0f-1317081.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/05/28/c07055b0fbde21fa0b5153e5a021ef0f-1317081.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "PG",
+            "aliases": [],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "days_of_our_lives_fast_tracked"
+            },
+            "videoCount": {
+                "episodesCount": 492,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "type": "daily"
+        },
+        {
+            "id": 1320826,
+            "epgData": {
+                "seriesCridId": [
+                    "80056",
+                    "798561"
+                ]
+            },
+            "tpId": "MTI4MDIzNg==",
+            "name": "The Young and the Restless Fast-Tracked",
+            "url": "https://10.com.au/the-young-and-the-restless-fast-tracked",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2024/07/05/5409bc43f96c6cec0b78d1c65ec99433-1325171.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/07/05/5409bc43f96c6cec0b78d1c65ec99433-1325171.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2024/07/05/f7f485dfa763d560c90bde1de7ea8822-1325169.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/07/05/f7f485dfa763d560c90bde1de7ea8822-1325169.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "PG",
+            "aliases": [],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "the_young_and_the_restless"
+            },
+            "videoCount": {
+                "episodesCount": 372,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "hasClosedCaptions": "yes",
+            "type": "daily"
+        },
+        {
+            "id": 1386587,
+            "epgData": {
+                "seriesCridId": [
+                    "83209",
+                    "83210",
+                    "83211"
+                ]
+            },
+            "tpId": "MTg1NjgzNw==",
+            "name": "Broadchurch",
+            "url": "https://10.com.au/broadchurch",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2025/07/14/fa8d21ebc2779f4d1652146a1f57dd1c-1386595.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/07/14/fa8d21ebc2779f4d1652146a1f57dd1c-1386595.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2025/07/14/0574fd5401d7faf9818f51314bfa761b-1386593.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/07/14/0574fd5401d7faf9818f51314bfa761b-1386593.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "M",
+            "aliases": [],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "broadchurch"
+            },
+            "videoCount": {
+                "episodesCount": 24,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "type": "standard"
+        },
+        {
+            "id": 1394121,
+            "epgData": {
+                "seriesCridId": [
+                    "83356",
+                    "83357",
+                    "83358",
+                    "83359"
+                ]
+            },
+            "tpId": "MTIxNDkzMQ==",
+            "name": "Above Suspicion",
+            "url": "https://10.com.au/above-suspicion",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2025/09/17/683f27dfdb3e58219ae527e037554a2c-1394154.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/09/17/683f27dfdb3e58219ae527e037554a2c-1394154.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2025/09/17/1266e7d1ba80904f01815b028a4a6bee-1394152.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2025/09/17/1266e7d1ba80904f01815b028a4a6bee-1394152.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "MA15+",
+            "aliases": [],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "above_suspicion"
+            },
+            "videoCount": {
+                "episodesCount": 11,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "type": "standard"
+        },
+        {
+            "id": 1150320,
+            "epgData": {
+                "seriesCridId": [
+                    "27653",
+                    "27654",
+                    "27655",
+                    "27656",
+                    "27657",
+                    "74361",
+                    "74362",
+                    "80123",
+                    "82785"
+                ]
+            },
+            "tpId": "MTIzMDUxMA==",
+            "name": "The Brokenwood Mysteries",
+            "url": "https://10.com.au/the-brokenwood-mysteries",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [
+                "Procedural"
+            ],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2022/05/25/8b287189670ffc56b4a83f2e1bea034c-1150373.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2022/05/25/8b287189670ffc56b4a83f2e1bea034c-1150373.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2022/05/25/8092653ba101c38f939137b71f92236f-1150371.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2022/05/25/8092653ba101c38f939137b71f92236f-1150371.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "M",
+            "aliases": [
+                "The Brokenwood Mysteries Encore",
+                "Brokenwood Mysteries"
+            ],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "the_brokenwood_mysteries"
+            },
+            "videoCount": {
+                "episodesCount": 42,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "type": "standard"
+        },
+        {
+            "id": 222157,
+            "epgData": {
+                "seriesCridId": [
+                    "59979",
+                    "60874",
+                    "60926",
+                    "61315",
+                    "61319",
+                    "61317",
+                    "61318",
+                    "61320",
+                    "62196",
+                    "61313",
+                    "62595",
+                    "62596",
+                    "62597",
+                    "62598",
+                    "62599",
+                    "62600",
+                    "62601",
+                    "59979",
+                    "62602",
+                    "62603",
+                    "62605",
+                    "62606",
+                    "64936",
+                    "65499",
+                    "65500",
+                    "65497",
+                    "65578",
+                    "65580",
+                    "65581",
+                    "65583",
+                    "67081",
+                    "68323",
+                    "68324",
+                    "68484",
+                    "68485",
+                    "68486",
+                    "68487",
+                    "68325",
+                    "68483",
+                    "69624",
+                    "70917",
+                    "70936",
+                    "70937",
+                    "70956",
+                    "71296",
+                    "71297",
+                    "70916",
+                    "77036",
+                    "77783",
+                    "77789",
+                    "77784",
+                    "77790",
+                    "77785",
+                    "77036",
+                    "77789",
+                    "77783",
+                    "77785",
+                    "77786",
+                    "77787",
+                    "77791",
+                    "80960",
+                    "82581",
+                    "82582",
+                    "82583",
+                    "82584",
+                    "82576",
+                    "82577",
+                    "82578",
+                    "82579",
+                    "82580"
+                ]
+            },
+            "tpId": "MjUxMjI3",
+            "name": "NCIS",
+            "url": "https://10.com.au/ncis",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [
+                "Procedural"
+            ],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2024/06/25/57595a30193084242ac72dfb02a79c8d-1322717.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/06/25/57595a30193084242ac72dfb02a79c8d-1322717.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2024/06/25/97411423469e13d0a73dfc2cce802195-1322715.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/06/25/97411423469e13d0a73dfc2cce802195-1322715.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "M",
+            "aliases": [
+                "NCIS",
+                "NCIS Encore"
+            ],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "ncis"
+            },
+            "videoCount": {
+                "episodesCount": 16,
+                "extrasCount": 3,
+                "otherCount": 0
+            },
+            "hasClosedCaptions": "yes",
+            "type": "standard"
+        },
+        {
+            "id": 221847,
+            "epgData": {
+                "seriesCridId": [
+                    "55878",
+                    "55879",
+                    "55876",
+                    "64456",
+                    "74216"
+                ]
+            },
+            "tpId": "MjQ4MTI3",
+            "name": "The Bold and The Beautiful",
+            "url": "https://10.com.au/the-bold-and-the-beautiful",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [
+                "Soap Opera"
+            ],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2024/05/22/be3a21c7cbd52b32511fbb1f0316d55a-1315793.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/05/22/be3a21c7cbd52b32511fbb1f0316d55a-1315793.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2024/05/22/9510184fc52dba72c84084acdf3fb017-1315791.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2024/05/22/9510184fc52dba72c84084acdf3fb017-1315791.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "PG",
+            "aliases": [
+                "The Bold and the Beautiful",
+                "The Bold & The Beautiful",
+                "The Bold & The Beautiful Encore"
+            ],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "the_bold_and_the_beautiful"
+            },
+            "videoCount": {
+                "episodesCount": 257,
+                "extrasCount": 0,
+                "otherCount": 0
+            },
+            "hasClosedCaptions": "yes",
+            "type": "standard"
+        },
+        {
+            "id": 222557,
+            "epgData": {
+                "seriesCridId": [
+                    "71616",
+                    "76156",
+                    "76156"
+                ]
+            },
+            "tpId": "MjU1MjI3",
+            "name": "Neighbours",
+            "url": "https://10.com.au/neighbours",
+            "genres": [
+                "Drama"
+            ],
+            "genreDisplayNames": [
+                ""
+            ],
+            "secondaryGenres": [],
+            "poster": {
+                "url": "https://10.com.au/ip/s3/2023/09/18/ee614cc0b9f3ea6ee72818403e234f53-1263782.jpg?image-profile=image_poster&io=portrait",
+                "retinaUrl": "https://10.com.au/ip/s3/2023/09/18/ee614cc0b9f3ea6ee72818403e234f53-1263782.jpg?image-profile=image_poster&io=portrait&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Poster-193x293.png"
+            },
+            "landscape": {
+                "url": "https://10.com.au/ip/s3/2023/09/19/3b3b4612fa8f48d416a58629b719a9d8-1263931.jpg?image-profile=image_full&io=landscape",
+                "retinaUrl": "https://10.com.au/ip/s3/2023/09/19/3b3b4612fa8f48d416a58629b719a9d8-1263931.jpg?image-profile=image_full&io=landscape&dpr=2",
+                "lazyLoad": true,
+                "alt": null,
+                "placeholderUrl": "/images/Placeholder-Full-1024x577.png"
+            },
+            "showRatingClassification": "PG",
+            "aliases": [
+                "Neighbours",
+                "Neighbours Encore"
+            ],
+            "hiddenFeatures": {
+                "search": false,
+                "autoSurfacing": false,
+                "footerLinks": false,
+                "showsIndex": false
+            },
+            "adOpsInformation": {
+                "showNameTargeting": "neighbours"
+            },
+            "videoCount": {
+                "episodesCount": 439,
+                "extrasCount": 124,
+                "otherCount": 55
+            },
+            "hasClosedCaptions": "yes",
+            "type": "daily"
+        }
+    ]
+}
