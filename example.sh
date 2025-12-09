@@ -1,0 +1,22 @@
+python3 src/cli.py \
+    10play-movies \
+    10play-shows-comedy \
+    10play-shows-drama \
+    10play-shows-kids \
+    abc-movies-a-z \
+    abc-movies-of-the-week \
+    abc-shows-best-of-british-tv \
+    abc-shows-comedy-gold \
+    abc-shows-time-for-a-rewatch \
+    abc-shows-timeless-tv-classics \
+    abc-shows-tv-shows-for-big-kids \
+    sbs-movies-all \
+    sbs-movies-recently-added \
+    sbs-shows-bingeable-box-sets \
+    sbs-shows-recently-added \
+    tubi-recently-added \
+    tubi-award-winners-and-nominees \
+    tubi-cult-classics \
+    tubi-most-popular \
+    tubi-recently-added \
+    tubi-trending-now
