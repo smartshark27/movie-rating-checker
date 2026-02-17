@@ -34,7 +34,6 @@ async def _get_tmdb_media_list_async(api_key, media_list):
             )
             cached = lookup_cache(cache, cache_key)
             if cached:
-                print(f"Using cached TMDB data for key '{cache_key}'")
                 tmdb_media = cached
             else:
                 tmdb_media = await get_media_from_tmdb_async(
@@ -135,7 +134,6 @@ async def query_tmdb_async(api_key, media, session, semaphore):
         print(f"Unknown media type '{media_type}' for item '{title}'")
         return []
     year = media.get("year")
-    print(f"Searching TMDB for '{title}' ({year})...")
 
     params = {
         "api_key": api_key,
@@ -161,7 +159,6 @@ async def lookup_tmdb_async(api_key, media_type, tmdb_id, session, semaphore):
     url = tmdb_movie_lookup_url if media_type == "movie" else tmdb_show_lookup_url
     url += f"/{tmdb_id}"
 
-    print(f"Looking up TMDB ID {tmdb_id} at URL {url}...")
     async with semaphore:
         async with session.get(url, params={"api_key": api_key}) as resp:
             if resp.status != 200:

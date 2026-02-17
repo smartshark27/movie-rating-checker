@@ -45,12 +45,15 @@ def get_tubi_media_list(access_token, collection="recently-added"):
     }
 
     res = requests.get(url, params=params, headers=headers)
-    res.raise_for_status()
+
+    if res.status_code != 200:
+        print(
+            "Tubi access token is invalid or expired. Please update it in input/tubi_access_token.txt."
+        )
+        print("Skipping Tubi media source due to invalid access token.")
+        return []
 
     contents = res.json().get("contents", {})
-
-    # save_to_json_file(res.json(), "output/tubi-api-response.json")
-    # return []
 
     is_show = lambda item: item["type"] == "s"
     media_list = [
@@ -66,7 +69,7 @@ def get_tubi_media_list(access_token, collection="recently-added"):
         for item in contents.values()
     ]
 
-    print(f"Total media found from Tubi: {len(media_list)}")
+    print(f"Total media found from Tubi {collection}: {len(media_list)}")
 
     return media_list
 

@@ -15,8 +15,5 @@ python3 src/cli.py \
     sbs-shows-bingeable-box-sets \
     sbs-shows-recently-added \
     tubi-recently-added \
-    tubi-award-winners-and-nominees \
-    tubi-cult-classics \
     tubi-most-popular \
-    tubi-recently-added \
     tubi-trending-now

@@ -41,7 +41,6 @@ def get_10play_media_list(collection="shows-drama"):
 
     media_list = []
     for i in range(MAX_PAGES):
-        print(f"Fetching page {i}...")
         response = requests.get(url, params=params, headers=headers)
         if response.status_code == 200:
             data = response.json()
@@ -63,13 +62,12 @@ def get_10play_media_list(collection="shows-drama"):
             params["skipIdList"] += ",".join(ids)
 
             if not data.get("hasMore", False):
-                print(f"No more pages after page {i}.")
                 break
         else:
             print(f"Failed to fetch page {i}. Status code: {response.status_code}")
             raise ConnectionError("Failed to fetch 10play collection page")
 
-    print(f"Total media found from 10 Play: {len(media_list)}")
+    print(f"Total media found from 10 Play {collection}: {len(media_list)}")
     return media_list
 
 

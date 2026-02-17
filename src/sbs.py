@@ -52,7 +52,6 @@ def get_sbs_media_list(collection="recently-added-movies"):
 
     media_list = []
     for page in range(1, max_pages + 1):
-        print(f"Fetching page {page}...")
         cursor_dict["page"] = str(page)
         cursor = base64.b64encode(json.dumps(cursor_dict).encode()).decode()
 
@@ -64,7 +63,6 @@ def get_sbs_media_list(collection="recently-added-movies"):
         data = response.json()
 
         if not data.get("items"):
-            print("No more items found, stopping.")
             break
 
         media_list.extend(
@@ -79,7 +77,7 @@ def get_sbs_media_list(collection="recently-added-movies"):
             ]
         )
 
-    print(f"Total media found from SBS On Demand: {len(media_list)}")
+    print(f"Total media found from SBS On Demand {collection}: {len(media_list)}")
     return media_list
 
 

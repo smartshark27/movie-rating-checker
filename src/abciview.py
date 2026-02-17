@@ -35,12 +35,12 @@ def get_abc_media_list(collection="movies-of-the-week"):
         {
             "mediaType": get_media_type(media),
             "title": media["title"],
-            "abcURL": media["shareUrl"],
+            "abcURL": media["shareUrl"] if "shareUrl" in media else "none",
         }
         for media in response.json()["items"]
     ]
 
-    print(f"Total media found from ABC iView: {len(media_list)}")
+    print(f"Total media found from ABC iView {collection}: {len(media_list)}")
     return media_list
 
 
