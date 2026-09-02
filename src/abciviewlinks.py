@@ -1,7 +1,7 @@
 import requests
 
 
-program_id = "bluey"
+program_id = "arrested-development"
 season = 3
 output_file = f"output/abc_{program_id}_{season}_episode_links.txt"
 

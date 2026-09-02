@@ -33,6 +33,11 @@ python src/cli.py abc-movies-a-z sbs-movies-all --tmdb-api-key YOUR_API_KEY
 - `--shows-min-rating`: Minimum rating for shows (default: 7.0).
 - `--sort-by`: Sort results by `tmdb-rating`, `tmdb-rating-count`, or `tmdb-popularity`.
 
+Alternatively, save values in below files under a directory called `input` instead of passing as args.
+
+- `./input/tmdb_api_key.txt`
+- `./input/tubi_access_token.txt`
+
 ## Output
 
 Results are saved in the `output` directory:
