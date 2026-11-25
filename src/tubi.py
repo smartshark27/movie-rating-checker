@@ -2,7 +2,6 @@ import requests
 
 from utils import read_text_file
 
-
 collection_urls = {
     "award-winners-and-nominees": "https://tensor-cdn.production-public.tubi.io/api/v7/containers/award_winners_and_nominees",
     "cult-classics": "https://tensor-cdn.production-public.tubi.io/api/v7/containers/cult_favorites",

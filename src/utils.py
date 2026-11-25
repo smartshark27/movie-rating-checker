@@ -19,8 +19,8 @@ def delete_dir_if_exists(directory):
 
     :param directory: Directory path to delete
     """
-    import shutil
     import os
+    import shutil
 
     if os.path.exists(directory):
         shutil.rmtree(directory)

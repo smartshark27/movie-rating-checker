@@ -1,6 +1,5 @@
 import requests
 
-
 program_id = "arrested-development"
 season = 3
 output_file = f"output/abc_{program_id}_{season}_episode_links.txt"
@@ -34,8 +33,7 @@ def save_links_to_file(episode_links):
     :param episode_links: List of episode links
     """
     with open(output_file, "w", encoding="utf-8") as f:
-        for link in episode_links:
-            f.write(f"{link}\n")
+        f.writelines(f"{link}\n" for link in episode_links)
 
 
 if __name__ == "__main__":

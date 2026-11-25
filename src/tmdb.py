@@ -1,4 +1,5 @@
 import asyncio
+
 import aiohttp
 
 from utils import create_dir_if_not_exists, read_json_file, save_to_json_file
@@ -143,13 +144,12 @@ async def query_tmdb_async(api_key, media, session, semaphore):
         params["year"] = year
 
     url = tmdb_movie_search_url if media_type == "movie" else tmdb_show_search_url
-    async with semaphore:
-        async with session.get(url, params=params) as resp:
-            if resp.status != 200:
-                print(f"TMDB search failed for '{title}': {resp.status}")
-                return []
-            data = await resp.json()
-            return data.get("results", [])
+    async with semaphore, session.get(url, params=params) as resp:
+        if resp.status != 200:
+            print(f"TMDB search failed for '{title}': {resp.status}")
+            return []
+        data = await resp.json()
+        return data.get("results", [])
 
 
 async def lookup_tmdb_async(api_key, media_type, tmdb_id, session, semaphore):
@@ -159,12 +159,11 @@ async def lookup_tmdb_async(api_key, media_type, tmdb_id, session, semaphore):
     url = tmdb_movie_lookup_url if media_type == "movie" else tmdb_show_lookup_url
     url += f"/{tmdb_id}"
 
-    async with semaphore:
-        async with session.get(url, params={"api_key": api_key}) as resp:
-            if resp.status != 200:
-                print(f"TMDB lookup failed for ID {tmdb_id}: {resp.status}")
-                return None
-            return await resp.json()
+    async with semaphore, session.get(url, params={"api_key": api_key}) as resp:
+        if resp.status != 200:
+            print(f"TMDB lookup failed for ID {tmdb_id}: {resp.status}")
+            return None
+        return await resp.json()
 
 
 # Sample TMDB TV show data structure from the API:

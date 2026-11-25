@@ -1,5 +1,6 @@
 import base64
 import json
+
 import requests
 
 # This script fetches a list of media in a collection from the SBS On Demand catalogue.

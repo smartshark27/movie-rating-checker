@@ -46,8 +46,7 @@ def save_links_to_file(episode_links):
     :param episode_links: List of episode links
     """
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        for link in episode_links:
-            f.write(f"{link}\n")
+        f.writelines(f"{link}\n" for link in episode_links)
 
 
 if __name__ == "__main__":

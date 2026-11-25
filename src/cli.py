@@ -1,9 +1,10 @@
 import argparse
 import os
 import sys
-from tenplay import get_10play_media_list
+
 from abciview import get_abc_media_list
 from sbs import get_sbs_media_list
+from tenplay import get_10play_media_list
 from tmdb import get_tmdb_media_list
 from tubi import get_tubi_media_list
 from utils import (

@@ -35,7 +35,7 @@ def get_abc_media_list(collection="movies-of-the-week"):
         {
             "mediaType": get_media_type(media),
             "title": media["title"],
-            "abcURL": media["shareUrl"] if "shareUrl" in media else "none",
+            "abcURL": media.get("shareUrl", "none"),
         }
         for media in response.json()["items"]
     ]
